@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Ordering.Application.Features.Orders.Queries.GetOrdersList
 {
-    public class GetOrderListQueryHandler : IRequestHandler<GetOrdersListQuery, List<OrderVm>>
+    public class GetOrderListQueryHandler : IRequestHandler<GetOrdersListQuery, List<OrdersVm>>
     {
         private readonly IOrderRepository orderRepository;
         private readonly IMapper mapper;
@@ -18,11 +19,11 @@ namespace Ordering.Application.Features.Orders.Queries.GetOrdersList
             this.mapper = mapper;
         }
 
-        public async Task<List<OrderVm>> Handle(GetOrdersListQuery request, 
+        public async Task<List<OrdersVm>> Handle(GetOrdersListQuery request, 
             CancellationToken cancellationToken)
         {
             var orderList = await orderRepository.GetOrdersByUserName(request.UserName);
-            return mapper.Map<List<OrderVm>>(orderList);
+            return mapper.Map<List<OrdersVm>>(orderList);
         }
     }
 }
